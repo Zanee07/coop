@@ -1,0 +1,57 @@
+/* Adicione isso no seu arquivo global de CSS */
+:root {
+  --background-dark: #0a0e1a;
+  --card-dark: #141b2d;
+  --border-dark: #1e2a3f;
+  --text-dark: #e2e8f0;
+  --text-muted-dark: #94a3b8;
+}
+
+.dark-mode {
+  background: var(--background-dark);
+  color: var(--text-dark);
+}
+
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
