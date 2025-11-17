@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/threads",
+      "destination": "/api/threads.js"
+    },
+    {
+      "source": "/api/messages",
+      "destination": "/api/messages.js"
+    },
+    {
+      "source": "/api/runs",
+      "destination": "/api/runs.js"
+    }
+  ]
+}

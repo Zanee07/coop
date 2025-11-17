@@ -18,7 +18,7 @@ interface ChatProps {
 
 // OpenAI Assistant Configuration
 const ASSISTANT_ID = "asst_CCu0BHjv7F57ES9RmPbHEaYT";
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
 const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
   const [threadId, setThreadId] = useState<string | null>(null);
@@ -45,7 +45,7 @@ const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
   useEffect(() => {
     const createThread = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/threads`, {
+        const response = await fetch('/api/threads', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
 
     try {
       // Add message to thread
-      await fetch(`${API_BASE_URL}/api/threads/${threadId}/messages`, {
+      await fetch(`/api/messages?threadId=${threadId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
       });
 
       // Run the assistant
-      const runResponse = await fetch(`${API_BASE_URL}/api/threads/${threadId}/runs`, {
+      const runResponse = await fetch(`/api/runs?threadId=${threadId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const statusResponse = await fetch(
-          `${API_BASE_URL}/api/threads/${threadId}/runs/${runId}`,
+          `/api/runs?threadId=${threadId}&runId=${runId}`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ const Chat = ({ sessionId, userName = "Usuário" }: ChatProps) => {
 
       // Get messages
       const messagesResponse = await fetch(
-        `${API_BASE_URL}/api/threads/${threadId}/messages`,
+        `/api/messages?threadId=${threadId}`,
         {
           headers: {
             'Content-Type': 'application/json',
