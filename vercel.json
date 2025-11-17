@@ -1,25 +1,5 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs20.x"
-    }
-  },
-  "rewrites": [
-    {
-      "source": "/api/threads",
-      "destination": "/api/threads.js"
-    },
-    {
-      "source": "/api/messages",
-      "destination": "/api/messages.js"
-    },
-    {
-      "source": "/api/runs",
-      "destination": "/api/runs.js"
-    },
-    {
-      "source": "/api/health",
-      "destination": "/api/health.js"
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite"
 }
