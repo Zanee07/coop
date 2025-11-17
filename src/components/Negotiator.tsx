@@ -13,7 +13,7 @@ interface NegotiatorProps {
   userName?: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 const NEGOTIATOR_ASSISTANT_ID = "asst_JQE3K3UtYHAsAbS5DEwOg1h8";
 
 const Negotiator = ({ userName = "Usuário" }: NegotiatorProps) => {
@@ -56,7 +56,7 @@ Sou seu **Assistente de Negociação**. Estou aqui para te ajudar a fechar mais 
   useEffect(() => {
     const createThread = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/threads`, {
+        const response = await fetch('/api/threads', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ Sou seu **Assistente de Negociação**. Estou aqui para te ajudar a fechar mais 
     setIsTyping(true);
 
     try {
-      await fetch(`${API_BASE_URL}/api/threads/${threadId}/messages`, {
+      await fetch(`/api/messages?threadId=${threadId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ Sou seu **Assistente de Negociação**. Estou aqui para te ajudar a fechar mais 
         }),
       });
 
-      const runResponse = await fetch(`${API_BASE_URL}/api/threads/${threadId}/runs`, {
+      const runResponse = await fetch(`/api/runs?threadId=${threadId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ Sou seu **Assistente de Negociação**. Estou aqui para te ajudar a fechar mais 
         await new Promise(resolve => setTimeout(resolve, 500));
 
         const statusResponse = await fetch(
-          `${API_BASE_URL}/api/threads/${threadId}/runs/${runId}`,
+          `/api/runs?threadId=${threadId}&runId=${runId}`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ Sou seu **Assistente de Negociação**. Estou aqui para te ajudar a fechar mais 
       if (!isComplete) throw new Error('Assistant timeout');
 
       const messagesResponse = await fetch(
-        `${API_BASE_URL}/api/threads/${threadId}/messages`,
+        `/api/messages?threadId=${threadId}`,
         {
           headers: {
             'Content-Type': 'application/json',
